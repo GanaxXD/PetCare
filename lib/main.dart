@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.orange.withAlpha(150),
       appBar: AppBar(
-        title: Text("Ajude um anjo",),
+        title: Text("Ajude um pet",),
         backgroundColor: Colors.orange,
         centerTitle: true,
       ),
