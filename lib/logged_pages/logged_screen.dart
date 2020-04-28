@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:petcare_app/logged_pages/cadastrar_screen.dart';
 import 'package:petcare_app/logged_pages/principal_screen.dart';
 
 class LoggedScreen extends StatefulWidget {
@@ -27,24 +29,39 @@ class _LoggedScreenState extends State<LoggedScreen> {
   //Lista de Telas
   final screens = <Widget>[
     Principal(),
-    Container(color: Colors.green,),
+    Cadastrar(),
     Container(color: Colors.white,),
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Localize um anjo"),
-        centerTitle: true,
-        backgroundColor: Colors.orange,
+    return WillPopScope(
+      onWillPop: (){},
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("PET CARE"),
+          centerTitle: true,
+          backgroundColor: Colors.orange,
+          actions: <Widget>[
+            Row(
+              children: <Widget>[
+                Text("SAIR", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                IconButton(
+                    icon: Icon(Icons.exit_to_app, color: Colors.white,),
+                    onPressed: () => exit(0), //da library dart.io
+
+                ),
+              ],
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            items: bottomNavigationBar,
+          currentIndex: indexTela,
+          onTap: mudandoTelas,
+        ),
+        body:screens[indexTela],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          items: bottomNavigationBar,
-        currentIndex: indexTela,
-        onTap: mudandoTelas,
-      ),
-      body:screens[indexTela],
     );
   }
 }

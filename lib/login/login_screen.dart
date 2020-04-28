@@ -16,82 +16,87 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Entrar no sistema"),
-        centerTitle: true,
-        backgroundColor: Colors.orange,
-      ),
-      body: SingleChildScrollView(
-        child: Form(
-          key: _key,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  FormFields(
-                    obscure: false,
-                    label: "E-mail",
-                    hint: "Digite seu e-mail",
-                    helper: "Utilize seu e-mail para realizar o login.",
-                    controller: _email,
-                  ),
-
-                  FormFields(
-                    obscure: true,
-                    label: "Senha",
-                    hint: "Digite sua senha",
-                    helper: "Digite sua senha para realizar o login.",
-                    controller: _senha,
-                  ),
-
-                  SizedBox(height: 10,),
-
-                  CircularButton(
-                    backgroundColor: Colors.orange,
-                    title: "Logar",
-                    colorText: Colors.white,
-                    onPressed: (){
-                      //Por aqui o código de validação do Firebase
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => LoggedScreen()
-                      ));
-                    },
-                  ),
-
-                  Divider(color: Colors.deepOrange,),
-
-                  Text("Esqueceu sua senha?", style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 16,
-                      decoration: TextDecoration.underline
+    return WillPopScope(
+      onWillPop: (){
+        Navigator.of(context).pop();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Entrar no sistema"),
+          centerTitle: true,
+          backgroundColor: Colors.orange,
+        ),
+        body: SingleChildScrollView(
+          child: Form(
+            key: _key,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    FormFields(
+                      obscure: false,
+                      label: "E-mail",
+                      hint: "Digite seu e-mail",
+                      helper: "Utilize seu e-mail para realizar o login.",
+                      controller: _email,
                     ),
-                  ),
 
-                  SizedBox(height: 30,),
-                  Divider(color: Colors.deepOrange,),
+                    FormFields(
+                      obscure: true,
+                      label: "Senha",
+                      hint: "Digite sua senha",
+                      helper: "Digite sua senha para realizar o login.",
+                      controller: _senha,
+                    ),
 
-                  Center(
-                    child: Text("Não possui uma conta?", style: TextStyle(
-                        color: Colors.deepOrange,
+                    SizedBox(height: 10,),
+
+                    CircularButton(
+                      backgroundColor: Colors.orange,
+                      title: "Logar",
+                      colorText: Colors.white,
+                      onPressed: (){
+                        //Por aqui o código de validação do Firebase
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => LoggedScreen()
+                        ));
+                      },
+                    ),
+
+                    Divider(color: Colors.deepOrange,),
+
+                    Text("Esqueceu sua senha?", style: TextStyle(
+                        color: Colors.blue,
                         fontSize: 16,
-                        decoration: TextDecoration.underline,
+                        decoration: TextDecoration.underline
+                      ),
                     ),
+
+                    SizedBox(height: 30,),
+                    Divider(color: Colors.deepOrange,),
+
+                    Center(
+                      child: Text("Não possui uma conta?", style: TextStyle(
+                          color: Colors.deepOrange,
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                      ),
+                      ),
                     ),
-                  ),
 
-                  SizedBox(height: 20,),
+                    SizedBox(height: 20,),
 
-                  CircularButton(
-                    backgroundColor: Colors.black26,
-                    colorText: Colors.white,
-                    title: "Cadastre-se",
-                    onPressed: (){},
-                  ),
-                ],
+                    CircularButton(
+                      backgroundColor: Colors.black26,
+                      colorText: Colors.white,
+                      title: "Cadastre-se",
+                      onPressed: (){},
+                    ),
+                  ],
+                ),
               ),
-            ),
+          ),
         ),
       ),
     );

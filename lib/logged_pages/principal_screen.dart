@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Principal extends StatefulWidget {
@@ -8,7 +9,8 @@ class Principal extends StatefulWidget {
 class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SingleChildScrollView(
+      child: Container(
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10),
         child: SingleChildScrollView(
@@ -38,16 +40,55 @@ class _PrincipalState extends State<Principal> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  Text("Objetivo:", style: TextStyle(
+                    color: Colors.black54, fontSize: 20, fontWeight: FontWeight.w500,
+                  ),),
+
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 4),
+                      child: Text("Pegar do firebase (solicitar medicamento; doar medicamento; animal abandonado", style: TextStyle(
+                        color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
+                      ),
+                        overflow: TextOverflow.ellipsis, softWrap: true,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
                   Text("Anjo:", style: TextStyle(
                     color: Colors.black54, fontSize: 20, fontWeight: FontWeight.w500,
                   ),),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0, top: 4),
-                    child: Text("Pegar do firebase o nome do ajudante", style: TextStyle(
-                      color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
-                    ), overflow: TextOverflow.ellipsis,),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 4),
+                      child: Text("Pegar do firebase o nome do ajudante", style: TextStyle(
+                        color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
+                      ), overflow: TextOverflow.ellipsis,),
+                    ),
                   ),
+                ],
+              ),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Contato:", style: TextStyle(
+                    color: Colors.black54, fontSize: 20, fontWeight: FontWeight.w500,
+                  ),),
+
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 4),
+                      child: Text("Pegar do firebase", style: TextStyle(
+                        color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
+                      ), overflow: TextOverflow.ellipsis, maxLines: 3,),
+                    ),),
                 ],
               ),
 
@@ -58,12 +99,13 @@ class _PrincipalState extends State<Principal> {
                     color: Colors.black54, fontSize: 20, fontWeight: FontWeight.w500,
                   ),),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0, top: 4),
-                    child: Text("Pegar do firebase", style: TextStyle(
-                      color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
-                    ), overflow: TextOverflow.ellipsis,),
-                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 4),
+                      child: Text("Pegar do firebase", style: TextStyle(
+                        color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
+                      ), overflow: TextOverflow.ellipsis,),
+                    ),),
                 ],
               ),
 
@@ -74,11 +116,13 @@ class _PrincipalState extends State<Principal> {
                     color: Colors.black54, fontSize: 20, fontWeight: FontWeight.w500,
                   ),),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0, top: 4),
-                    child: Text("Pegar do firebase", style: TextStyle(
-                      color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
-                    ), overflow: TextOverflow.ellipsis,),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 4),
+                      child: Text("Pegar do firebase", style: TextStyle(
+                        color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
+                      ), overflow: TextOverflow.ellipsis,),
+                    ),
                   ),
                 ],
               ),
@@ -90,17 +134,20 @@ class _PrincipalState extends State<Principal> {
                     color: Colors.black54, fontSize: 20, fontWeight: FontWeight.w500,
                   ),),
 
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10.0, top: 4),
-                    child: Text("Pegar do firebase", style: TextStyle(
-                      color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
-                    ), overflow: TextOverflow.ellipsis,),
-                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 4),
+                      child: Text("Pegar do firebase (Rua das flores, número 982, Cruzeiro do anil, MA)", style: TextStyle(
+                        color: Colors.black54, fontSize: 16, fontWeight: FontWeight.w300,
+                      ), overflow: TextOverflow.ellipsis, maxLines: 3,),
+                    ),),
                 ],
               ),
+
             ],
           ),
         ),
-      );
+      ),
+    );
   }
 }
