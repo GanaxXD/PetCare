@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/logged_pages/cadastrar_screen.dart';
+import 'package:petcare_app/logged_pages/lista_anjos_screen.dart';
 import 'package:petcare_app/logged_pages/principal_screen.dart';
 
 class LoggedScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _LoggedScreenState extends State<LoggedScreen> {
   final screens = <Widget>[
     Principal(),
     Cadastrar(),
-    Container(color: Colors.white,),
+    ListAngelsScreen(),
   ];
 
   @override
