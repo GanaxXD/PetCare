@@ -7,7 +7,6 @@ class UserModel extends Model{
 
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser firebaseUser;
-  AuthResult user;
   Map<String, dynamic> userData = Map();
   bool isLoading = false;
 
@@ -36,7 +35,8 @@ class UserModel extends Model{
         email: userData["email"],
         password: pass
     ).then((user) async {
-      user = user;
+      firebaseUser = user; //só funciona com o firebase_auth: ^0.11.1+12
+      print(firebaseUser.uid);
       onSuccess();
 
       /*
@@ -44,9 +44,11 @@ class UserModel extends Model{
       banco.
        */
       await _saveUserData(userData);
-
+      print("Cheguei aqui");
       isLoading = false;
+      print(isLoading);
       notifyListeners();
+
     }).catchError((e){
       onFail();
       isLoading = false;
@@ -74,12 +76,24 @@ class UserModel extends Model{
   }
 
   /*
-  Função ara cadastrar um novo usuário.
+  Função  que retorna se o usuário está logado.
   @param: nenhum
   @result: true para logado, false para não logado
    */
   bool isLoggedIn(){
+    return firebaseUser != null;
+  }
 
+  /*
+  Função  para realizar o logout.
+  @param: nenhum
+  @result: nenhum
+   */
+  void signOut(){
+    _auth.signOut();
+    firebaseUser= null;
+    userData = Map();
+    notifyListeners();
   }
 
   /*
@@ -89,6 +103,6 @@ class UserModel extends Model{
    */
   Future<Null> _saveUserData (Map<String, dynamic> userData) async{
     this.userData = userData;
-    await Firestore.instance.collection('anjos').document(user.user.uid).setData(userData);
+    await Firestore.instance.collection("usuarios").document(firebaseUser.uid).setData(userData);
   }
 }

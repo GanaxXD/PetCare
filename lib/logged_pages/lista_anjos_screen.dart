@@ -12,12 +12,15 @@ class _ListAngelsScreenState extends State<ListAngelsScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            CardAngel(
-              angel: "Pedro",
-              objective: "Pedir Medicamento",
-              medicine: "Alupurinol",
-              place: "Shopping da Ilha, atras do coleoaisjisjadijasoidjoaisjdoiasjfijadijfiadjflijadlifjl asfoijadifjlkadj",
+            Flexible(
+              child: CardAngel(
+                angel: "Pedro uashiduhasiudhiuashiduh",
+                objective: "Pedir Medicamento saduhiasdiuasud",
+                medicine: "Alupurinol isudiuashduisidhsudhius",
+                place: "Shopping da Ilha, atras do coleoaisjisjadijasoidjoaisjdoiasjfijadijfiadjflijadlifjl asfoijadifjlkadj",
+              ),
             ),
           ],
         )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:petcare_app/logged_pages/logged_screen.dart';
+import 'package:petcare_app/logged_pages/tela_cadastar.dart';
 import 'package:petcare_app/login/widgets/form_field.dart';
 import 'package:petcare_app/widgets/circular_button.dart';
 
@@ -66,10 +67,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     Divider(color: Colors.deepOrange,),
 
-                    Text("Esqueceu sua senha?", style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 16,
-                        decoration: TextDecoration.underline
+                    GestureDetector(
+                      onTap: (){},
+                      child: Text("Esqueceu sua senha? Clique aqui para recuperá-la.", style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 16,
+                          decoration: TextDecoration.underline
+                        ),
                       ),
                     ),
 
@@ -91,7 +95,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       backgroundColor: Colors.black26,
                       colorText: Colors.white,
                       title: "Cadastre-se",
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => TelaCadastrar()));
+                      },
                     ),
                   ],
                 ),

@@ -29,23 +29,25 @@ class CardAngel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(this.angel, style: TextStyle(
+                    Text(this.angel.length > 20 ? this.angel.substring(0,20) + "..." : this.angel,
+                      style: TextStyle(
                         color: Colors.black45,
                         fontSize: 22,
                         fontWeight: FontWeight.w600
                       ), overflow: TextOverflow.ellipsis,),
 
-                    Text(this.objective, style: TextStyle(
+                    Text(this.objective.length > 30 ? this.objective.substring(0,30) + "...": this.objective,
+                      style: TextStyle(
                           color: Colors.black26,
                           fontSize: 16,
                       ), overflow: TextOverflow.ellipsis, maxLines: 1,),
 
-                    Text(this.medicine, style: TextStyle(
+                    Text(this.medicine.length>30? this.medicine.substring(0,30) + "..." : this.medicine, style: TextStyle(
                       color: Colors.black26,
                       fontSize: 16,
                     ), overflow: TextOverflow.ellipsis, maxLines: 1,),
 
-                   Text(this.place, style: TextStyle(
+                   Text(this.place.length>30? this.place.substring(0, 30)+"...": this.place, style: TextStyle(
                             color: Colors.black26,
                             fontSize: 16,
                           ),
