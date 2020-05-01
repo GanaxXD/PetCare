@@ -47,6 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         hint: "Digite seu e-mail",
                         helper: "Utilize seu e-mail para realizar o login.",
                         controller: _email,
+                        validate: (email){
+                          if(email.toString().isEmpty || !email.toString().contains("@"))
+                            return "E-Mail necessário para realizar o login.";
+                        },
                       ),
 
                       FormFields(
@@ -55,6 +59,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         hint: "Digite sua senha",
                         helper: "Digite sua senha para realizar o login.",
                         controller: _senha,
+                        validate: (senha){
+                          if(senha.toString().isEmpty)
+                            return "Informe sua senha.";
+                        },
                       ),
 
                       SizedBox(height: 10,),
@@ -69,15 +77,14 @@ class _LoginScreenState extends State<LoginScreen> {
                               builder: (context) => LoggedScreen()
                           ));
 
-                          if(_key.currentState.validate()){
-
-                          }
-                          model.signIn(
-                            email: _email.text,
-                            pass: _senha.text,
-                            onSuccess: _onSuccess,
-                            onFail: _onFail,
-                          );
+                          /*if(_key.currentState.validate()){
+                            model.signIn(
+                              email: _email.text,
+                              pass: _senha.text,
+                              onSuccess: _onSuccess,
+                              onFail: _onFail,
+                            );
+                          }*/
 
                         },
                       ),

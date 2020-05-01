@@ -24,7 +24,7 @@ class _CadastrarState extends State<Cadastrar> {
             child: Column(
               mainAxisSize: MainAxisSize.min, //Para os campos filhos da coluna que sejam flexible e expanded possa aparecer na tela
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CadastroFormField(
                   onSaved: (){},
@@ -47,14 +47,14 @@ class _CadastrarState extends State<Cadastrar> {
                 SizedBox(height: 20,),
 
                 Text("Objetivo do cadastro", style: TextStyle(
-                  color: Colors.orange,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16
+                    color: Colors.orange,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16
                 ),),
 
-                Wrap(
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  direction: Axis.horizontal,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text("Doar Medicamentos", style: TextStyle(
                       color: Colors.orange,
@@ -71,6 +71,13 @@ class _CadastrarState extends State<Cadastrar> {
                       value: doar,
                     ),
 
+                  ],
+                ),
+
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
                     Text("Pedir Medicamentos", style: TextStyle(
                       color: Colors.orange,
                       fontSize: 16,
@@ -85,7 +92,13 @@ class _CadastrarState extends State<Cadastrar> {
                       groupValue: objetivo,
                       value: receber,
                     ),
+                  ],
+                ),
 
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
                     Text("Indicar Abandono", style: TextStyle(
                       color: Colors.orange,
                       fontSize: 16,
@@ -104,6 +117,7 @@ class _CadastrarState extends State<Cadastrar> {
                   ],
                 ),
 
+
                 SizedBox(height: 20,),
 
                 Divider(color: Colors.deepOrange, height: 5,),
@@ -111,51 +125,51 @@ class _CadastrarState extends State<Cadastrar> {
                 SizedBox(height: 20,),
 
                 Text("Informe o sexo do animal", style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ), overflow: TextOverflow.ellipsis,),
+                  color: Colors.orange,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ), overflow: TextOverflow.ellipsis,),
 
                 Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Macho", style: TextStyle(color: Colors.orange,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600
-                        ),),
-                        Radio(
-                            value: macho,
-                            groupValue: sexo,
-                            onChanged: (int v){
-                              setState(() {
-                                sexo = v;
-                              });
-                            }
-                        ),
-                        Padding(padding: const EdgeInsets.only(left: 10),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text("Fêmea", style: TextStyle(color: Colors.orange,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600
-                              ),),
-                              Radio(
-                                  value: femea,
-                                  groupValue: sexo,
-                                  onChanged: (int v){
-                                    setState(() {
-                                      sexo = v;
-                                    });
-                                  }
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Macho", style: TextStyle(color: Colors.orange,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600
+                    ),),
+                    Radio(
+                        value: macho,
+                        groupValue: sexo,
+                        onChanged: (int v){
+                          setState(() {
+                            sexo = v;
+                          });
+                        }
                     ),
+                    Padding(padding: const EdgeInsets.only(left: 10),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text("Fêmea", style: TextStyle(color: Colors.orange,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600
+                          ),),
+                          Radio(
+                              value: femea,
+                              groupValue: sexo,
+                              onChanged: (int v){
+                                setState(() {
+                                  sexo = v;
+                                });
+                              }
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
 
                 SizedBox(height: 20,),
 
