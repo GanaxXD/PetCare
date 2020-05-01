@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:petcare_app/pedidos/pedidos.dart';
+import 'package:petcare_app/logged_pages/angel_screen.dart';
 
 class CardAngel extends StatelessWidget {
 
-  String angel, objective, place, medicine;
+ /* String angel, objective, place, medicine;
   CardAngel({this.angel, this.objective, this.place, this.medicine});
+*/
+
+ Pedidos pedido;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context)=>AngelScreen(pedido))
+        );
+      },
       child: Container(
         height: 150,
         child: Card(
@@ -29,23 +38,23 @@ class CardAngel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(this.angel, style: TextStyle(
+                    Text(this.pedido.anjo.length > 20 ? this.pedido.anjo.substring(0, 20) + "..." : this.pedido.anjo, style: TextStyle(
                         color: Colors.black45,
                         fontSize: 22,
                         fontWeight: FontWeight.w600
                       ), overflow: TextOverflow.ellipsis,),
 
-                    Text(this.objective, style: TextStyle(
+                    Text(this.pedido.objetivo.length > 20 ? this.pedido.objetivo.substring(0,20) +"..." :this.pedido.objetivo, style: TextStyle(
                           color: Colors.black26,
                           fontSize: 16,
                       ), overflow: TextOverflow.ellipsis, maxLines: 1,),
 
-                    Text(this.medicine, style: TextStyle(
+                    Text(this.pedido.medicamento.length > 20 ? this.pedido.medicamento.substring(0,20) +"..." : this.pedido.medicamento, style: TextStyle(
                       color: Colors.black26,
                       fontSize: 16,
                     ), overflow: TextOverflow.ellipsis, maxLines: 1,),
 
-                   Text(this.place, style: TextStyle(
+                   Text(this.pedido.endereco.length >20 ? this.pedido.endereco.substring(0,20) + "..." : this.pedido.endereco, style: TextStyle(
                             color: Colors.black26,
                             fontSize: 16,
                           ),

@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/logged_pages/cadastrar_screen.dart';
-import 'package:petcare_app/logged_pages/lista_anjos_screen.dart';
 import 'package:petcare_app/logged_pages/principal_screen.dart';
 import 'package:petcare_app/models/user_model.dart';
+import 'package:petcare_app/principal2_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LoggedScreen extends StatefulWidget {
@@ -31,9 +31,10 @@ class _LoggedScreenState extends State<LoggedScreen> {
 
   //Lista de Telas
   final screens = <Widget>[
-    Principal(),
+    PrincipalScreen2(),
+    //Principal(),
     Cadastrar(),
-    ListAngelsScreen(),
+    //ListAngelsScreen(),
   ];
 
   @override

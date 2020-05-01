@@ -26,15 +26,7 @@ class _CadastrarState extends State<Cadastrar> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                CadastroFormField(
-                  onSaved: (){},
-                  validate: (){},
-                  label: "Anjo",
-                  helper: "Digite aqui o seu nome",
-                  hint: "Ex: Ana Lúcia, João Carlos",
-                  icon: Icon(Icons.person, color: Colors.orange,),
-                ),
-
+               
                 CadastroFormField(
                   onSaved: (){},
                   validate: (){},

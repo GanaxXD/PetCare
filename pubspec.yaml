@@ -28,6 +28,7 @@ dependencies:
   firebase_storage: ^3.1.5
   firebase_auth: ^0.11.1+12
   scoped_model: ^1.0.1
+  intl: ^0.16.0
 
 
 dev_dependencies:
@@ -52,6 +53,8 @@ flutter:
   #  - images/a_dot_ham.jpeg
   assets:
     - assets/petCare-inicio.png
+    - assets/dog.png
+    - assets/pegada.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
