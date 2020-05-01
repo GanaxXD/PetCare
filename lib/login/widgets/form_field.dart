@@ -8,7 +8,7 @@ class FormFields extends StatelessWidget {
   TextEditingController controller;
   Function validate, onSaved;
 
-  FormFields({this.label, this.icon, this.hint, this.helper, this.obscure, this.controller});
+  FormFields({this.label, this.icon, this.hint, this.helper, this.obscure, this.controller, this.validate, this.onSaved});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,7 @@ class FormFields extends StatelessWidget {
       controller: controller,
       validator: validate,
       onSaved: onSaved,
+
     );
   }
 }
