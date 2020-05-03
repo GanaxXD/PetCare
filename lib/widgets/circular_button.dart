@@ -4,7 +4,7 @@ class CircularButton extends StatelessWidget {
 
   final String title;
   final Color colorText, backgroundColor;
-  final Function onPressed;
+  Function onPressed;
 
   CircularButton({this.title, this.colorText, this.backgroundColor, this.onPressed});
 

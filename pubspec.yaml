@@ -29,6 +29,7 @@ dependencies:
   firebase_auth: ^0.11.1+12
   scoped_model: ^1.0.1
   intl: ^0.16.0
+  rflutter_alert: ^1.0.3
 
 
 dev_dependencies:

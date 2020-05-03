@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Pedidos{
-  String anjo, objetivo, medicamento, pet, sexoPet, endereco, id, numero, contato;
+  String anjo, objetivo, medicamento, pet, sexoPet, endereco, id, numero, contato, facebook;
   bool concluido;
   Timestamp dataDoPedido;
+
+  Pedidos();
 
   Pedidos.fromDocuments(DocumentSnapshot snapshot){
     anjo = snapshot.data["usuario"];
@@ -16,6 +18,8 @@ class Pedidos{
     dataDoPedido = snapshot.data["data_do_pedido"];
     numero= snapshot.data["numero"];
     contato = snapshot.data["contato"];
+    id = snapshot.documentID;
+    facebook = snapshot.data["facebook"];
   }
 
   Map<String, dynamic> toMap(){
@@ -30,6 +34,7 @@ class Pedidos{
       "data_do_pedido": dataDoPedido,
       "contato" : contato,
       "numero" : numero,
+      "facebook" : facebook,
     };
   }
 }

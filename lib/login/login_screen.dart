@@ -73,18 +73,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         colorText: Colors.white,
                         onPressed: (){
                           //Por aqui o código de validação do Firebase
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          /*Navigator.of(context).pushReplacement(MaterialPageRoute(
                               builder: (context) => LoggedScreen()
-                          ));
+                          ));*/
 
-                          /*if(_key.currentState.validate()){
+                          if(_key.currentState.validate()){
                             model.signIn(
                               email: _email.text,
                               pass: _senha.text,
                               onSuccess: _onSuccess,
                               onFail: _onFail,
                             );
-                          }*/
+                          }
 
                         },
                       ),
@@ -171,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void _onSuccess(){
     _ScaffoldKey.currentState.showSnackBar(
       SnackBar(
-        duration: Duration(seconds: 3),
+        duration: Duration(seconds: 2),
         backgroundColor: Colors.green,
         content: Text("Bem-vindo de volta!", style: TextStyle(
             color: Colors.white,
@@ -180,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
-    Future.delayed(Duration(seconds: 3)).then((_){
+    Future.delayed(Duration(seconds: 1)).then((_){
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => LoggedScreen()));
     });

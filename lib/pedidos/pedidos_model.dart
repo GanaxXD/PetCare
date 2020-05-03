@@ -7,8 +7,10 @@ import 'package:scoped_model/scoped_model.dart';
 class PedidosModel extends Model{
   UserModel user;
   List<Pedidos> pedidos = [];
+  Map<String, dynamic> pedidosData = Map();
 
-  PedidosModel(this.user);
+  PedidosModel();
+  PedidosModel.user(this.user);
   static PedidosModel of(BuildContext context) => ScopedModel.of<PedidosModel>(context);
 
   /*
@@ -17,13 +19,24 @@ class PedidosModel extends Model{
   @param: pedido
   @result: nenhum
    */
-  void addPedidoPessoal(Pedidos pedido){
+  void addPedidoPessoal(Pedidos pedido, String userId){
     pedidos.add(pedido);
-    Firestore.instance.collection("usuarios").document(user.firebaseUser.uid)
+    Firestore.instance.collection("usuarios").document(userId)
       .collection("pedidosFeitos").add(pedido.toMap()).then((doc){
        pedido.id = doc.documentID;
     });
     notifyListeners();
+  }
+
+  /*
+  Função para adicionar o pedido a lista de pedidos do
+  banco de dados.
+  @param: pedido
+  @result: Future nulo
+   */
+  Future<Null> addPedido({@required Map<String, dynamic> pedidosData}) async{
+    this.pedidosData = pedidosData;
+    await Firestore.instance.collection("pedidos").document().setData(pedidosData);
   }
   
 }

@@ -27,7 +27,7 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                       margin: const EdgeInsets.all(10),
                       padding: const EdgeInsets.only(top: 10, left: 10),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text("Anjo: ", style: TextStyle(
                             color: Colors.black,
@@ -37,30 +37,24 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: model.userData.isEmpty ? Text("Usuário"):
-                            Text(model.userData["usuario"].toString().length > 50 ?
-                              model.userData["usuario"].toString().substring(0,50)+"...":
+                            Text(model.userData["usuario"].toString().length > 20 ?
+                              model.userData["usuario"].toString().substring(0,20)+"...":
                               model.userData["usuario"],
                               style: TextStyle(
                                 color: Colors.black54,
                                 fontSize: 14,
-                                fontWeight: FontWeight.w200
+                                fontWeight: FontWeight.w600
                               ),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(10),
-                      padding: const EdgeInsets.only(top: 0, left: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text("Contato: ", style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14
-                          ),),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16),
+                            child: Text("Contato: ", style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14
+                            ),),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: model.userData.isEmpty ? Text("Contato"):
@@ -70,7 +64,7 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                               style: TextStyle(
                                   color: Colors.black54,
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w200
+                                  fontWeight: FontWeight.w600
                               ),
                             ),
                           ),
@@ -120,16 +114,19 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                         } else {
                           return ListView.builder(
                             itemCount: snapshot.data.documents.length,
-                            reverse: true,
                             shrinkWrap: true,
+                            reverse: false,
+                            scrollDirection: Axis.vertical,
                             physics: NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.all(12),
+                            padding: EdgeInsets.all(12.0),
                             //ignore: missing_return
                             itemBuilder: (context, index){
+                              print(index.toString());
+                              print(snapshot.data.documents.length.toString());
                               if(snapshot.data.documents[index]["concluido"] == false){
                                 return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]));
                               } else {
-                                Text("");
+                                Text("Sem pedidos cadastrados.", style: TextStyle(color: Colors.blue), textAlign: TextAlign.center,);
                               }
                             },
                           );

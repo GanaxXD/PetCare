@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:petcare_app/filter_screen.dart';
 import 'package:petcare_app/logged_pages/cadastrar_screen.dart';
-import 'package:petcare_app/logged_pages/principal_screen.dart';
 import 'package:petcare_app/models/user_model.dart';
+import 'package:petcare_app/my_calls%20_screen.dart';
 import 'package:petcare_app/principal2_screen.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -25,15 +26,17 @@ class _LoggedScreenState extends State<LoggedScreen> {
   //Lista de ícones
   final bottomNavigationBar = <BottomNavigationBarItem>[
     BottomNavigationBarItem(icon: Icon(Icons.home, color: Colors.orange,), title: Text("Tela Principal", style: TextStyle(color: Colors.orange),)),
-    BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline, color: Colors.orange,), title: Text("Cadastrar Pet", style: TextStyle(color: Colors.orange),)),
-    BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted, color: Colors.orange,), title: Text("Lista de Anjos", style: TextStyle(color: Colors.orange),)),
+    BottomNavigationBarItem(icon: Icon(Icons.add_circle_outline, color: Colors.orange,), title: Text("Cadastrar Pedido", style: TextStyle(color: Colors.orange),)),
+    BottomNavigationBarItem(icon: Icon(Icons.search, color: Colors.orange,), title: Text("Buscar", style: TextStyle(color: Colors.orange),)),
+    BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted, color: Colors.orange,), title: Text("Meus Chamados", style: TextStyle(color: Colors.orange),)),
   ];
 
   //Lista de Telas
   final screens = <Widget>[
     PrincipalScreen2(),
-    //Principal(),
     Cadastrar(),
+    FilterScreen(),
+    MyCallsScreen()
     //ListAngelsScreen(),
   ];
 
