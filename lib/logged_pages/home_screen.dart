@@ -21,7 +21,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.orange.withAlpha(150),
       appBar: AppBar(
-        title: Text("Ajude um pet",),
+        title: Text("PET CARE",),
         backgroundColor: Colors.orange,
         centerTitle: true,
       ),
@@ -32,11 +32,11 @@ class _HomeState extends State<Home> {
             height: MediaQuery.of(context).size.height * 0.1,
           ),
 
-          Text("PET CARE", style: TextStyle(
+         /*Text("PET CARE", style: TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.w600,
-          ), textAlign: TextAlign.center,),
+          ), textAlign: TextAlign.center,),*/
 
           Padding(
             padding: const EdgeInsets.only(top: 16, bottom: 0),

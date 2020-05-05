@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class CadastroFormField extends StatelessWidget {
 
-  String hint, helper, label;
+  String hint, helper, label, initialValue;
   Function onSaved, validate;
   Icon icon;
   TextEditingController controller;
 
-  CadastroFormField({this.label, this.hint, this.helper, this.validate, this.onSaved, this.icon, this.controller});
+  CadastroFormField({this.label, this.hint, this.helper, this.validate, this.onSaved, this.icon, this.controller, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,7 @@ class CadastroFormField extends StatelessWidget {
         labelText: label,
       ),
       controller: controller,
+      //initialValue: initialValue.toString(),
 
     );
   }

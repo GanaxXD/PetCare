@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/models/user_model.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
-import 'package:petcare_app/pedidos/pedidos_model.dart';
 import 'package:petcare_app/pedidos/pedidos_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -121,6 +120,7 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                             padding: EdgeInsets.all(12.0),
                             //ignore: missing_return
                             itemBuilder: (context, index){
+                              print(Timestamp.fromDate(DateTime.now()).toString());
                               print(index.toString());
                               print(snapshot.data.documents.length.toString());
                               if(snapshot.data.documents[index]["concluido"] == false){

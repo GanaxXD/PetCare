@@ -226,7 +226,6 @@ class _CadastrarState extends State<Cadastrar> {
                       fontWeight: FontWeight.w600,
                     ), overflow: TextOverflow.ellipsis,),
 
-
                     CadastroFormField(
                       controller: _contatoPetController,
                       onSaved: (){},
@@ -325,12 +324,20 @@ class _CadastrarState extends State<Cadastrar> {
                                 sex = "Macho";
                               }
 
+                              var dataPedido = Timestamp.fromDate(DateTime.now());
+                              /*
+                              Chave para a edição do pedido
+                               */
+                              var inicio = dataPedido.microsecondsSinceEpoch;
+                              print("Inicio: "+inicio.toString());
+
+
                               if(_formKey.currentState.validate()){
                                 Map<String, dynamic> pedidoData = {
                                   "concluído": false,
                                   "instagram": _contatoPetController.text.isEmpty? "Sem Instagram" : _contatoPetController.text.toString(),
                                   "facebook": _facebookController.text.isEmpty? "Sem Facebook":_facebookController.text.toString(),
-                                  "data_do_pedido": DateTime.now(),
+                                  "data_do_pedido": dataPedido,
                                   "endereco":_localPetController.text.toString(),
                                   "medicamento" : _medicamentoController.text.isEmpty ? "Não necessita de medicamento" :_medicamentoController.text.toString(),
                                   "nomepet": _nomePetController.text.toString(),
@@ -338,21 +345,27 @@ class _CadastrarState extends State<Cadastrar> {
                                   "objetivo" : obj,
                                   "sexopet": sex,
                                   "usuario" : !model.isLoggedIn() ? "Usuário desconhecido" : model.userData["usuario"].toString(),
+                                  "usuario_do_chamado": !model.isLoggedIn() ? "Sem Id" : model.firebaseUser.uid,
+                                  "chave":inicio.toString(),
                                 };
+
+
                                 Pedidos pedido = Pedidos();
                                 pedido.concluido = false;
                                 pedido.facebook = _facebookController.text.isEmpty? "Sem Facebook":_facebookController.text.toString();
                                 pedido.contato = _contatoPetController.text.isEmpty? "Sem Instagram" : _contatoPetController.text.toString();
-                                pedido.dataDoPedido = Timestamp.fromDate(DateTime.now());
+                                pedido.dataDoPedido = pedidoData["data_do_pedido"];
                                 pedido.endereco =  _localPetController.text.toString();
                                 pedido.medicamento = _medicamentoController.text.isEmpty ? "Não necessita de medicamento" :_medicamentoController.text.toString();
                                 pedido.pet = _nomePetController.text.toString();
                                 pedido.numero = _numeroPetController.text.isEmpty ? "Sem número" : _numeroPetController.text.toString();
                                 pedido.sexoPet = sex;
                                 pedido.objetivo = obj;
+                                pedido.chave = inicio.toString();
                                 pedido.anjo = !model.isLoggedIn() ? "Usuário desconhecido" : model.userData["usuario"].toString();
 
                                 await PedidosModel.of(context).addPedido(pedidosData: pedidoData);
+                                print(pedido.id);
                                 await PedidosModel.of(context).addPedidoPessoal(pedido, model.firebaseUser.uid);
                                 Alert(
                                     context: context,

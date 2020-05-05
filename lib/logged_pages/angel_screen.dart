@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:petcare_app/logged_pages/logged_screen.dart';
+import 'package:petcare_app/pedidos/edit_screen.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
 import 'package:petcare_app/widgets/circular_button.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -31,7 +32,7 @@ class AngelScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                  padding: const EdgeInsets.only(left: 10,top: 20.0, bottom: 10),
                   child: Text(this.pedido.anjo,
                     style: TextStyle(
                       color: Colors.black54,
@@ -42,7 +43,7 @@ class AngelScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 10, top: 20),
+                  padding: const EdgeInsets.only(bottom: 10, top: 20, right: 10),
                   child: pedido.concluido == true ?
                     Icon(Icons.check, color: Colors.green, size: 40,):
                     Icon(Icons.check, color: Colors.grey[600], size: 40,)

@@ -14,8 +14,7 @@ class PedidosModel extends Model{
   static PedidosModel of(BuildContext context) => ScopedModel.of<PedidosModel>(context);
 
   /*
-  Função para adicionar o pedido a lista de pedidos do
-  usuário.
+  Função para adicionar o pedido a lista de pedidos do usuário.
   @param: pedido
   @result: nenhum
    */
@@ -23,20 +22,32 @@ class PedidosModel extends Model{
     pedidos.add(pedido);
     Firestore.instance.collection("usuarios").document(userId)
       .collection("pedidosFeitos").add(pedido.toMap()).then((doc){
-       pedido.id = doc.documentID;
+       pedido.idMeuChamado = doc.documentID;
     });
     notifyListeners();
+
   }
 
+
   /*
-  Função para adicionar o pedido a lista de pedidos do
-  banco de dados.
+  Função para adicionar o pedido a lista de pedidos do banco de dados.
   @param: pedido
   @result: Future nulo
    */
   Future<Null> addPedido({@required Map<String, dynamic> pedidosData}) async{
     this.pedidosData = pedidosData;
-    await Firestore.instance.collection("pedidos").document().setData(pedidosData);
+    await Firestore.instance.collection("pedidos").document(pedidosData["usuario"]+pedidosData["chave"]).setData(pedidosData);
+  }
+
+  /*
+  Função para editar o pedido no banco de dados.
+  @param: pedido
+  @result: Future nulo
+   */
+  Future<Null> editarPedido({@required Map<String, dynamic> pedidosData, @required String userId, @required String idPedido}) async{
+    this.pedidosData = pedidosData;
+    await Firestore.instance.collection("usuarios").document(userId).collection("pedidosFeitos").document(idPedido).setData(pedidosData);
+    await Firestore.instance.collection("pedidos").document(pedidosData["usuario"]+pedidosData["chave"]).setData(pedidosData);
   }
   
 }

@@ -15,6 +15,7 @@ class LoggedScreen extends StatefulWidget {
 class _LoggedScreenState extends State<LoggedScreen> {
 
   int indexTela = 0;
+  String uid;
 
   //Mudando as telas
   void mudandoTelas(int index){
@@ -31,19 +32,22 @@ class _LoggedScreenState extends State<LoggedScreen> {
     BottomNavigationBarItem(icon: Icon(Icons.format_list_bulleted, color: Colors.orange,), title: Text("Meus Chamados", style: TextStyle(color: Colors.orange),)),
   ];
 
-  //Lista de Telas
-  final screens = <Widget>[
-    PrincipalScreen2(),
-    Cadastrar(),
-    FilterScreen(),
-    MyCallsScreen()
-    //ListAngelsScreen(),
-  ];
 
   @override
   Widget build(BuildContext context) {
     return ScopedModelDescendant<UserModel>(
       builder: (context, child, model){
+
+        this.uid = model.firebaseUser.uid;
+        //Lista de Telas
+        final screens = <Widget>[
+          PrincipalScreen2(),
+          Cadastrar(),
+          FilterScreen(),
+          MyCallsScreen(this.uid),
+          //ListAngelsScreen(),
+        ];
+
         return WillPopScope(
           onWillPop: (){},
           child: Scaffold(
