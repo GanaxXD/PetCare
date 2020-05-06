@@ -24,7 +24,7 @@ class _MyCallsScreenState extends State<MyCallsScreen> {
         child: StreamBuilder(
               stream: Firestore.instance.collection("usuarios").document(this.uid).collection("pedidosFeitos").snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData || snapshot == null){
+                if (!snapshot.hasData || snapshot == null || snapshot.data.documents.length == 0){
                   return Container(
                     padding: const EdgeInsets.all(10),
                     margin: const EdgeInsets.all(20),

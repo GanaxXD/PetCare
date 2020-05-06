@@ -96,7 +96,7 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Image.asset('assets/dog.png', color: Colors.orangeAccent,
-                                    height: 35, width: 35,
+                                    height: 25, width: 25,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
