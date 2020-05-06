@@ -37,16 +37,16 @@ class PedidosTile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    pedido.anjo.length > 20 ?
-                        Text(pedido.anjo.substring(0,20)+"...", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),) :
-                        Text(pedido.anjo, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    pedido.anjo.length > 30 ?
+                        Text("Anjo: "+pedido.anjo.substring(0,30)+"...", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),) :
+                        Text("Anjo: "+pedido.anjo, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
 
-                    pedido.objetivo.length > 20 ?
-                        Text("Objetivo: "+ pedido.objetivo.substring(0,20)+"...", style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),):
+                    pedido.objetivo.length > 30 ?
+                        Text("Objetivo: "+ pedido.objetivo.substring(0,30)+"...", style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),):
                         Text("Objetivo: "+ pedido.objetivo, style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),),
 
-                    pedido.endereco.length > 20 ?
-                        Text("Local: "+ pedido.endereco.substring(0,20)+"...", style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),):
+                    pedido.endereco.length > 30 ?
+                        Text("Local: "+ pedido.endereco.substring(0,30)+"...", style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),):
                         Text("Local: "+ pedido.endereco, style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),),
                   ],
                 ),

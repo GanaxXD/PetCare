@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:petcare_app/models/user_model.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
 import 'package:petcare_app/pedidos/pedidos_tile.dart';
+import 'package:petcare_app/pesquisa/cardPesquisa.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -52,18 +53,20 @@ class _FilterScreenState extends State<FilterScreen> {
                 children: <Widget>[
                   Padding(padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
                     child: TextField(
+                      controller: _searchController,
                       decoration: InputDecoration(
                         icon: Icon(Icons.search, color: Colors.orange,),
-                        hintText: "Pesquise por algum pedido",
-                        helperText: "Ex: Alupurinol, Shopping tal"
+                        hintText: "Pesquise por algum medicamento, local ou nome do Pet",
+                        helperText: "Ex: Alupurinol, Shopping tal, Scooby",
+                        labelText: "Faça uma pesquisa: ",
                       ),
                     ),
                   ),
                   SizedBox(height: 10,),
                   StreamBuilder(
-                    stream: Firestore.instance.collection("pedidos").snapshots(),
+                    stream:  Firestore.instance.collection("pedidos").snapshots(),
                     builder: (context, snapshot) {
-                      if(!snapshot.hasData || snapshot.data.documents.length == 0 || snapshot.data == null){
+                      if(!snapshot.hasData || snapshot.data.documents.length == 0 || snapshot == null){
                         print(pedidos.length.toString());
                         return Container(
                           padding: const EdgeInsets.all(10),
@@ -95,10 +98,21 @@ class _FilterScreenState extends State<FilterScreen> {
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index){
                               print(pedidos[index].medicamento);
-                              return filter == null || filter == "" ?
-                                PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index])) :
-                                  pedidos[index].medicamento.toLowerCase().contains(filter.toLowerCase()) ?
-                                    PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index])) : new Container();
+                              return filter == null || filter == "" || filter == " "?
+                                CardPesquisa(context, Pedidos.fromDocuments(snapshot.data.documents[index])) :
+                                  pedidos[index].medicamento.toLowerCase().contains(filter.toLowerCase()) 
+                                      || pedidos[index].pet.toLowerCase().contains(filter.toLowerCase()) 
+                                      || pedidos[index].endereco.toLowerCase().contains(filter.toLowerCase())?
+                                    CardPesquisa(context, pedidos[index]) :
+                                    Container(
+                                      height: MediaQuery.of(context).size.height, //Para que apareça apenas uma mensagem em resposta
+                                      width: MediaQuery.of(context).size.width*0.8,
+                                      padding: const EdgeInsets.all(10),
+                                      child: Text("Sem resultados para a busca.", style: TextStyle(
+                                        color: Colors.grey[800],
+                                        fontSize: 12
+                                      ), textAlign: TextAlign.center,),
+                                    );
                               //return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]));
                             }
                         );
