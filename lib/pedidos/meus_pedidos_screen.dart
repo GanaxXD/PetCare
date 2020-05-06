@@ -327,12 +327,12 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
                         buttons: [
                           DialogButton(
                               color: Colors.orange,
-                              child: Text("Finalizar", style:
+                              child: Text("Excluir", style:
                               TextStyle(color: Colors.white, fontSize: 20,)),
                               onPressed: () async {
                                 print(pedido.id);
-                                await Firestore.instance.collection("usuarios").document(uid).collection("pedidosFeitos").document(pedido.id).delete();
-                                await Firestore.instance.collection("pedidos").document(pedido.id).delete().then((_){
+                                await Firestore.instance.collection("usuarios").document(uid).collection("pedidosFeitos").document(pedido.idMeuChamado).delete();
+                                await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).delete().then((_){
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => LoggedScreen()
                                   ));

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:petcare_app/logged_pages/logged_screen.dart';
 import 'package:petcare_app/logged_pages/widgets/cadastro_form_field.dart';
 import 'package:petcare_app/models/user_model.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
@@ -28,6 +27,18 @@ class _CadastrarState extends State<Cadastrar> {
   TextEditingController _facebookController = TextEditingController();
   TextEditingController _numeroPetController = TextEditingController();
   TextEditingController _medicamentoController = TextEditingController();
+
+
+  @override
+  void dispose() {
+    _nomePetController.dispose();
+    _localPetController.dispose();
+    _contatoPetController.dispose();
+    _facebookController.dispose();
+    _numeroPetController.dispose();
+    _medicamentoController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +74,7 @@ class _CadastrarState extends State<Cadastrar> {
                       controller: _medicamentoController,
                       onSaved: (){},
                       validate: (medicamento){
-                        if(medicamento.toString().length >1 && medicamento.toString().length <3)
+                        if(medicamento.toString().length >1 && medicamento.toString().length <2)
                           return "Preencha com um medicamento de nome válido.";
                       },
                       label: "Medicamento (Não obrigatório)",
@@ -288,6 +299,27 @@ class _CadastrarState extends State<Cadastrar> {
                             colorText: Colors.white,
                             //ignore: missing_return
                             onPressed: () async {
+                              if(_nomePetController.text.length<3 || _localPetController.text.length == null || _localPetController.text.length < 10 || _localPetController.text.isEmpty || (_medicamentoController.text.length >0 && _medicamentoController.text.length<3)){
+                                return Alert(
+                                    context: context,
+                                    title: "Dados incorretos.",
+                                    type: AlertType.error,
+                                    desc: "Verifique se você informou um Local de Encontro (Não informe o endereço de sua casa)."
+                                        " Verifique também se o nome do pet cadastrado possui mais de 3 caracteres. "
+                                        "Verifique ainda se ao digitar um medicamento (que não é obrigatório), você "
+                                        "digitou o nome de um medicamento com mais de 3 caracteres.",
+                                    buttons: [
+                                      DialogButton(
+                                        child: Text("Ok", style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20
+                                        ),),
+                                        onPressed: ()=> Navigator.of(context).pop(),
+                                        color: Colors.orange,
+                                      ),
+                                    ]
+                                ).show();
+                              }
                               if(_facebookController.text.isEmpty && _contatoPetController.text.isEmpty && _numeroPetController.text.isEmpty){
                                 return Alert(
                                     context: context,
@@ -295,7 +327,7 @@ class _CadastrarState extends State<Cadastrar> {
                                     type: AlertType.error,
                                     desc: "Você precisa informar pelo menos uma das três "
                                         "formas de contato, para que as pessoas possam entrar "
-                                        "em contato com você",
+                                        "em contato com você.",
                                     buttons: [
                                       DialogButton(
                                           child: Text("Ok", style: TextStyle(
@@ -363,6 +395,8 @@ class _CadastrarState extends State<Cadastrar> {
                                 pedido.objetivo = obj;
                                 pedido.chave = inicio.toString();
                                 pedido.anjo = !model.isLoggedIn() ? "Usuário desconhecido" : model.userData["usuario"].toString();
+                                pedido.id = pedidoData["usuario"]+pedidoData["chave"];
+                                pedido.idMeuChamado = null; //pegará na função addPedido, logo abaixo.
 
                                 await PedidosModel.of(context).addPedido(pedidosData: pedidoData);
                                 print(pedido.id);

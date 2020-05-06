@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:petcare_app/logged_pages/logged_screen.dart';
 import 'package:petcare_app/logged_pages/widgets/cadastro_form_field.dart';
 import 'package:petcare_app/models/user_model.dart';
-import 'package:petcare_app/my_calls%20_screen.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
-import 'package:petcare_app/pedidos/pedidos_model.dart';
 import 'package:petcare_app/widgets/circular_button.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -94,7 +93,6 @@ class _EditScreenState extends State<EditScreen> {
                       ),
 
                       CadastroFormField(
-                        //initialValue: "${pedido.pet.toString()}",
                         controller: _nomePetController,
                         onSaved: (){},
                         label: "Pet",
@@ -104,7 +102,6 @@ class _EditScreenState extends State<EditScreen> {
                       ),
 
                       CadastroFormField(
-                        //initialValue: pedido.medicamento,
                         controller: _medicamentoController,
                         onSaved: (){},
                         label: "Medicamento (Não obrigatório)",
@@ -120,7 +117,6 @@ class _EditScreenState extends State<EditScreen> {
                       SizedBox(height: 20,),
 
                       CadastroFormField(
-                        //initialValue: pedido.endereco,
                         controller: _localPetController,
                         onSaved: (){},
                         // ignore: missing_return
@@ -141,7 +137,6 @@ class _EditScreenState extends State<EditScreen> {
 
 
                       CadastroFormField(
-                        //initialValue: pedido.contato,
                         controller: _contatoPetController,
                         onSaved: (){},
                         label: "Informe seu Instagram",
@@ -151,7 +146,6 @@ class _EditScreenState extends State<EditScreen> {
                       ),
 
                       CadastroFormField(
-                        //initialValue: pedido.facebook,
                         controller: _facebookController,
                         onSaved: (){},
                         label: "Informe sua conta do Facebook",
@@ -191,6 +185,23 @@ class _EditScreenState extends State<EditScreen> {
                               //ignore: missing_return
                               onPressed: () async {
 
+                                if(_numeroPetController.text.length>1 && _numeroPetController.text.length <11){
+                                  return Alert(
+                                      context: context,
+                                      desc: "O número que você inseriu é inválido. Por favor, digite um número de"
+                                          " 11 dígitos ou se preferir, não informe nenhum contato.",
+                                      title: "Número Invalído",
+                                    type: AlertType.error,
+                                    buttons: [
+                                      DialogButton(
+                                          child: Text("Ok", style: TextStyle(color: Colors.white, fontSize: 20),),
+                                          onPressed: (context) => Navigator.of(context).pop(),
+                                        color: Colors.orange,
+                                      ),
+                                    ]
+                                  ).show();
+                                }
+
                                 String obj, sex;
                                 if(objetivo == 0){
                                   obj = "Doar Medicamento";
@@ -207,22 +218,36 @@ class _EditScreenState extends State<EditScreen> {
                                 }
 
                                 if(_formKey.currentState.validate()){
-                                  Map<String, dynamic> pedidoData = {
+                                  await Firestore.instance.collection("usuarios").document(uid).collection("pedidosFeitos").document(pedido.idMeuChamado).setData({
                                     "concluído": pedido.concluido,
-                                    "instagram": _contatoPetController.text.isEmpty? pedido.contato : _contatoPetController.text.toString(),
+                                    "instagram": _contatoPetController.text.isEmpty? pedido.contato.toString() : _contatoPetController.text.toString(),
                                     "facebook": _facebookController.text.isEmpty? pedido.facebook :_facebookController.text.toString(),
                                     "endereco":_localPetController.text.isEmpty ? pedido.endereco : _localPetController.text,
                                     "medicamento" : _medicamentoController.text.isEmpty ? pedido.medicamento :_medicamentoController.text.toString(),
                                     "nomepet": _nomePetController.text.isEmpty ? pedido.pet : _nomePetController.text.toString(),
-                                    "numero" : _numeroPetController.text.isEmpty ? pedido.numero : _numeroPetController.text.toString(),
+                                    "numero" : _numeroPetController.text.isEmpty ? pedido.numero.toString() : _numeroPetController.text.toString(),
                                     "objetivo" : pedido.objetivo,
                                     "sexopet": pedido.sexoPet,
                                     "usuario" : pedido.anjo,
                                     "usuario_do_chamado": uid,
-                                  };
-                                  print("pedido.id: "+pedido.id);
-                                  print("pedido.idChamado: "+pedido.idMeuChamado);
-                                  await PedidosModel.of(context).editarPedido(pedidosData: pedidoData, userId: model.firebaseUser.uid, idPedido: pedido.idMeuChamado).then((_){
+                                    "chave" : pedido.chave,
+                                    "data_do_pedido": pedido.dataDoPedido,
+                                  });
+                                  await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).setData({
+                                    "concluído": pedido.concluido,
+                                    "instagram": _contatoPetController.text.isEmpty? pedido.contato.toString() : _contatoPetController.text.toString(),
+                                    "facebook": _facebookController.text.isEmpty? pedido.facebook :_facebookController.text.toString(),
+                                    "endereco":_localPetController.text.isEmpty ? pedido.endereco : _localPetController.text,
+                                    "medicamento" : _medicamentoController.text.isEmpty ? pedido.medicamento :_medicamentoController.text.toString(),
+                                    "nomepet": _nomePetController.text.isEmpty ? pedido.pet : _nomePetController.text.toString(),
+                                    "numero" : _numeroPetController.text.isEmpty ? pedido.numero.toString() : _numeroPetController.text.toString(),
+                                    "objetivo" : pedido.objetivo,
+                                    "sexopet": pedido.sexoPet,
+                                    "usuario" : pedido.anjo,
+                                    "usuario_do_chamado": uid,
+                                    "chave" : pedido.chave,
+                                    "data_do_pedido": pedido.dataDoPedido,
+                                  }).then((_){
                                     return Alert(
                                         context: context,
                                         title: "Pedido Editado!",
@@ -258,8 +283,29 @@ class _EditScreenState extends State<EditScreen> {
                                         ]
                                     ).show();
                                   });
+                                  //await PedidosModel.of(context).editarPedido(pedidosData: pedidoData, userId: model.firebaseUser.uid, idPedido: pedido.idMeuChamado).then((_){
+
 
                                 }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: CircularButton(
+                              backgroundColor: Colors.grey[800],
+                              title: "Cancelar",
+                              colorText: Colors.white,
+                              //ignore: missing_return
+                              onPressed: () async {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => LoggedScreen()
+                                ));
                               },
                             ),
                           ),

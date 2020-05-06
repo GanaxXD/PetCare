@@ -18,7 +18,7 @@ class Pedidos{
     concluido = snapshot.data["concluido"];
     dataDoPedido = snapshot.data["data_do_pedido"];
     numero= snapshot.data["numero"];
-    contato = snapshot.data["contato"];
+    contato = snapshot.data["instagram"];
     id = snapshot.data["usuario"]+snapshot.data["chave"].toString();
     idMeuChamado = snapshot.documentID;
     facebook = snapshot.data["facebook"];

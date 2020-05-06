@@ -32,12 +32,6 @@ class _HomeState extends State<Home> {
             height: MediaQuery.of(context).size.height * 0.1,
           ),
 
-         /*Text("PET CARE", style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ), textAlign: TextAlign.center,),*/
-
           Padding(
             padding: const EdgeInsets.only(top: 16, bottom: 0),
             child: Image.asset('assets/petCare-inicio.png',

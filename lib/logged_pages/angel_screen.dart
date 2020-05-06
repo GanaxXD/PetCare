@@ -71,7 +71,7 @@ class AngelScreen extends StatelessWidget {
                 Text("Data do pedido: ", style: TextStyle(
                     color: Colors.black54, fontSize: 16, fontWeight: FontWeight.bold
                 ),),
-                Text(DateFormat("dd/MM/yyy").format(DateTime.fromMicrosecondsSinceEpoch(inicio)), style: TextStyle(
+                Text(DateFormat("dd/MM/yyy").format(DateTime.fromMicrosecondsSinceEpoch(inicio)).toString(), style: TextStyle(
                     color: Colors.black45, fontSize: 16, fontWeight: FontWeight.normal
                 ),),
               ],
@@ -136,7 +136,7 @@ class AngelScreen extends StatelessWidget {
                 Text("Me contacte pelo Instagram: ", style: TextStyle(
                     color: Colors.black54, fontSize: 16, fontWeight: FontWeight.bold
                 ),),
-                Text(pedido.contato, style: TextStyle(
+                Text(pedido.contato.toString(), style: TextStyle(
                     color: Colors.black45, fontSize: 16, fontWeight: FontWeight.normal
                 ),),
               ],
