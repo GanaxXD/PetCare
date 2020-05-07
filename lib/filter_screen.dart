@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:petcare_app/models/user_model.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
+import 'package:petcare_app/pedidos/pedidos_model.dart';
 import 'package:petcare_app/pedidos/pedidos_tile.dart';
 import 'package:petcare_app/pesquisa/cardPesquisa.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -63,11 +64,10 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
                   SizedBox(height: 10,),
-                  StreamBuilder(
+                  StreamBuilder<QuerySnapshot>(
                     stream:  Firestore.instance.collection("pedidos").snapshots(),
                     builder: (context, snapshot) {
-                      if(!snapshot.hasData || snapshot.data.documents.length == 0 || snapshot == null){
-                        print(pedidos.length.toString());
+                      if(!snapshot.hasData || snapshot.data.documents.isEmpty || snapshot.data == null){
                         return Container(
                           padding: const EdgeInsets.all(10),
                           margin: const EdgeInsets.all(20),
@@ -102,7 +102,10 @@ class _FilterScreenState extends State<FilterScreen> {
                                 CardPesquisa(context, Pedidos.fromDocuments(snapshot.data.documents[index])) :
                                   pedidos[index].medicamento.toLowerCase().contains(filter.toLowerCase()) 
                                       || pedidos[index].pet.toLowerCase().contains(filter.toLowerCase()) 
-                                      || pedidos[index].endereco.toLowerCase().contains(filter.toLowerCase())?
+                                      || pedidos[index].endereco.toLowerCase().contains(filter.toLowerCase())
+                                      || pedidos[index].anjo.toLowerCase().contains(filter.toLowerCase())
+                                      || pedidos[index].contato.toLowerCase().contains(filter.toLowerCase())
+                                      || pedidos[index].facebook.toLowerCase().contains(filter.toLowerCase())?
                                     CardPesquisa(context, pedidos[index]) :
                                     Container(
                                       height: MediaQuery.of(context).size.height, //Para que apareça apenas uma mensagem em resposta
