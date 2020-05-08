@@ -52,7 +52,7 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
               ),
               Padding(
                   padding: const EdgeInsets.only(bottom: 10, top: 20, right: 10),
-                  child: pedido.concluido == true ?
+                  child: pedido.concluido == "S" ?
                   Icon(Icons.check, color: Colors.green, size: 40,):
                   Icon(Icons.check, color: Colors.grey[600], size: 40,)
               ),
@@ -63,7 +63,7 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(pedido.concluido==true ? "Pedido atendido: Sim": "Pedido atendido: Não",
+              Text(pedido.concluido=="S" ? "Pedido atendido: Sim": "Pedido atendido: Não",
                 style: TextStyle(
                     color: Colors.black54, fontSize: 16, fontWeight: FontWeight.bold
                 ),),
@@ -144,7 +144,7 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
               Text("Me contacte pelo Instagram: ", style: TextStyle(
                   color: Colors.black54, fontSize: 16, fontWeight: FontWeight.bold
               ),),
-              Text(pedido.contato.toString(), style: TextStyle(
+              Text(this.pedido.contato, style: TextStyle(
                   color: Colors.black45, fontSize: 16, fontWeight: FontWeight.normal
               ),),
             ],
@@ -219,7 +219,7 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
                               onPressed: () async {
                                 print(pedido.id);
                                 await Firestore.instance.collection("usuarios").document(uid).collection("pedidosFeitos").document(pedido.idMeuChamado).setData({
-                                  "concluido": true,
+                                  "concluido": "S",
                                   "instagram": pedido.contato,
                                   "facebook": pedido.facebook,
                                   "data_do_pedido": pedido.dataDoPedido,
@@ -234,7 +234,7 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
                                   "chave":pedido.chave,
                                 });
                                 await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).setData({
-                                  "concluido": true,
+                                  "concluido": "S",
                                   "instagram": pedido.contato,
                                   "facebook": pedido.facebook,
                                   "data_do_pedido": pedido.dataDoPedido,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:petcare_app/logged_pages/logged_screen.dart';
 import 'package:petcare_app/logged_pages/widgets/cadastro_form_field.dart';
 import 'package:petcare_app/models/user_model.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
@@ -304,7 +305,7 @@ class _CadastrarState extends State<Cadastrar> {
                                     context: context,
                                     title: "Dados incorretos.",
                                     type: AlertType.error,
-                                    desc: "Verifique se você informou um Local de Encontro (Não informe o endereço de sua casa)."
+                                    desc: "Verifique se você informou um Local de Encontro com pelo menos 10 caracteres (Não informe o endereço de sua casa)."
                                         " Verifique também se o nome do pet cadastrado possui mais de 3 caracteres. "
                                         "Verifique ainda se ao digitar um medicamento (que não é obrigatório), você "
                                         "digitou o nome de um medicamento com mais de 3 caracteres.",
@@ -366,7 +367,7 @@ class _CadastrarState extends State<Cadastrar> {
 
                               if(_formKey.currentState.validate()){
                                 Map<String, dynamic> pedidoData = {
-                                  "concluído": false,
+                                  "concluído": "N",
                                   "instagram": _contatoPetController.text.isEmpty? "Sem Instagram" : _contatoPetController.text.toString(),
                                   "facebook": _facebookController.text.isEmpty? "Sem Facebook":_facebookController.text.toString(),
                                   "data_do_pedido": dataPedido,
@@ -383,7 +384,7 @@ class _CadastrarState extends State<Cadastrar> {
 
 
                                 Pedidos pedido = Pedidos();
-                                pedido.concluido = false;
+                                pedido.concluido = "N";
                                 pedido.facebook = _facebookController.text.isEmpty? "Sem Facebook":_facebookController.text.toString();
                                 pedido.contato = _contatoPetController.text.isEmpty? "Sem Instagram" : _contatoPetController.text.toString();
                                 pedido.dataDoPedido = pedidoData["data_do_pedido"];
@@ -411,9 +412,10 @@ class _CadastrarState extends State<Cadastrar> {
                                         color: Colors.orange,
                                         child: Text("Fechar", style:
                                         TextStyle(color: Colors.white, fontSize: 20,)),
-                                        onPressed: () => Navigator.of(context).pop() /*Navigator.of(context).push(MaterialPageRoute(
-                                                           builder: (context) => LoggedScreen()
-                                                         )),*/
+                                        onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                                            builder: (context) => LoggedScreen()
+                                        ))
+
                                     )
                                   ]
                                 ).show();

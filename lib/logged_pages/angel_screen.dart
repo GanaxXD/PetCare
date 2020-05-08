@@ -45,7 +45,7 @@ class AngelScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 10, top: 20, right: 10),
-                  child: pedido.concluido == true ?
+                  child: pedido.concluido == "S" ?
                     Icon(Icons.check, color: Colors.green, size: 40,):
                     Icon(Icons.check, color: Colors.grey[600], size: 40,)
                 ),
@@ -56,7 +56,7 @@ class AngelScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(pedido.concluido==true ? "Pedido atendido: Sim": "Pedido atendido: Não",
+                Text(pedido.concluido=="S" ? "Pedido atendido: Sim": "Pedido atendido: Não",
                   style: TextStyle(
                   color: Colors.black54, fontSize: 16, fontWeight: FontWeight.bold
                 ),),
@@ -213,7 +213,7 @@ class AngelScreen extends StatelessWidget {
                                 TextStyle(color: Colors.white, fontSize: 20,)),
                                 onPressed: () async {
                                   await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).setData({
-                                    "concluido": true,
+                                    "concluido": "S",
                                     "instagram":  pedido.contato.toString(),
                                     "facebook": pedido.facebook,
                                     "endereco":pedido.endereco,

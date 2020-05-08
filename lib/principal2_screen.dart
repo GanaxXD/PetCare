@@ -11,8 +11,17 @@ class PrincipalScreen2 extends StatefulWidget {
 }
 
 class _PrincipalScreen2State extends State<PrincipalScreen2> {
+
+  List<Pedidos> pedidos;
+
+  Future<QuerySnapshot> carregaPedidos() async {
+    QuerySnapshot query = await Firestore.instance.collection("pedidos").getDocuments();
+    pedidos = query.documents.map((doc)=> Pedidos.fromDocuments(doc)).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
+    carregaPedidos();
     return ScopedModelDescendant<UserModel>(
       builder: (context, child, model){
         return WillPopScope(
@@ -29,20 +38,20 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text("Anjo: ", style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 14
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14
                           ),),
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: model.userData.isEmpty ? Text("Usuário"):
                             Text(model.userData["usuario"].toString().length > 20 ?
-                              model.userData["usuario"].toString().substring(0,20)+"...":
-                              model.userData["usuario"],
+                            model.userData["usuario"].toString().substring(0,20)+"...":
+                            model.userData["usuario"],
                               style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600
                               ),
                             ),
                           ),
@@ -87,7 +96,10 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                       stream: Firestore.instance.collection("pedidos").snapshots(),
                       // ignore: missing_return
                       builder: (context, snapshot){
-                        if(!snapshot.hasData || snapshot.data == null || snapshot.hasData == false || snapshot.data.documents.length == 0){
+                        print("INDEX: "+snapshot.data.documents.length.toString());
+                        print("TEM DATA? "+snapshot.hasData.toString());
+                        print("É NULO? "+snapshot.data.toString());
+                        if(!snapshot.hasData || snapshot.data == null || snapshot.data.documents.length < 0){
                           return Container(
                             padding: const EdgeInsets.all(10),
                             margin: const EdgeInsets.all(20),
@@ -96,14 +108,14 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Image.asset('assets/dog.png', color: Colors.orangeAccent,
-                                    height: 25, width: 25,
+                                  height: 25, width: 25,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Text("Sem pedidos cadastrados.",
                                     style: TextStyle(
-                                      color: Colors.deepOrange,
-                                      fontSize: 14
+                                        color: Colors.deepOrange,
+                                        fontSize: 14
                                     ),
                                   ),
                                 ),
@@ -116,8 +128,14 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.all(12),
+                            //ignore: missing_return
                             itemBuilder: (context, index) {
-                              if(snapshot.data.documents[index]["concluido"] == false){
+                              print("TAMANHO DA LISTA: "+pedidos.length.toString());
+                              print("PEDIDOS: "+pedidos[index].concluido.toString());
+                              print("DOCUMENT[INDEX]"+snapshot.data.documents[index]["concluido"]);
+                              if(snapshot.data.documents[index]["concluido"].toString().contains("N")){
+                                print("INDEX: "+index.toString());
+                                print("DOCUMENT[INDEX][CONCLUIDO]: "+snapshot.data.documents[index]["concluido"]); //Pedidos.fromDocuments(snapshot.data.documents[index])
                                 return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]), model.firebaseUser.uid);
                               } else{
                                 return Container(
@@ -128,6 +146,7 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: <Widget>[
                                       Image.asset('assets/dog.png', color: Colors.orangeAccent,
                                         height: 25, width: 25,
