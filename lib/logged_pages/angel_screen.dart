@@ -11,7 +11,8 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 class AngelScreen extends StatelessWidget {
 
   Pedidos pedido;
-  AngelScreen(this.pedido);
+  String uid;
+  AngelScreen(this.pedido, this.uid);
 
   @override
   Widget build(BuildContext context) {
@@ -203,17 +204,29 @@ class AngelScreen extends StatelessWidget {
                           title: "Finalizar Pedido?",
                           desc: "Deseja Finalizar o pedido criado? Ao finalizá-lo,"
                               " o sistema entenderá que você já entrou em contato com a dono "
-                              "deste chamado e já entrou em um acordo com o mesmo.",
+                              "deste chamado e já entrou em um acordo com o mesmo. Finalizar não é"
+                              " o mesmo que excluir. Você só poderá excluir os seus pedidos.",
                           buttons: [
                             DialogButton(
                                 color: Colors.orange,
                                 child: Text("Finalizar", style:
                                 TextStyle(color: Colors.white, fontSize: 20,)),
                                 onPressed: () async {
-                                  print(pedido.id);
-                                  await Firestore.instance.collection("pedidos").document(pedido.id).setData({
+                                  await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).setData({
                                     "concluido": true,
-                                  }, merge: true).then((_){
+                                    "instagram":  pedido.contato.toString(),
+                                    "facebook": pedido.facebook,
+                                    "endereco":pedido.endereco,
+                                    "medicamento" : pedido.medicamento,
+                                    "nomepet": pedido.pet,
+                                    "numero" : pedido.numero.toString(),
+                                    "objetivo" : pedido.objetivo,
+                                    "sexopet": pedido.sexoPet,
+                                    "usuario" : pedido.anjo,
+                                    "usuario_do_chamado": uid,
+                                    "chave" : pedido.chave,
+                                    "data_do_pedido": pedido.dataDoPedido,
+                                  }).then((_){
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => LoggedScreen()
                                     ));

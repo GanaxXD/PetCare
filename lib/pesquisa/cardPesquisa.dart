@@ -5,6 +5,7 @@ import 'package:petcare_app/pedidos/pedidos.dart';
 class CardPesquisa extends StatelessWidget {
 
   final Pedidos pedido;
+  String uid;
   BuildContext context;
   CardPesquisa(this.context, this.pedido);
 
@@ -13,7 +14,7 @@ class CardPesquisa extends StatelessWidget {
     return InkWell(
       onTap: (){
         Navigator.of(context).push(
-            MaterialPageRoute(builder: (context)=>AngelScreen(pedido))
+            MaterialPageRoute(builder: (context)=>AngelScreen(pedido, uid))
         );
       },
       child: Card(

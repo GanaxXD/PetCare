@@ -30,6 +30,7 @@ dependencies:
   scoped_model: ^1.0.1
   intl: ^0.16.0
   rflutter_alert: ^1.0.3
+  flutter_launcher_icons: ^0.7.0
 
 
 dev_dependencies:
@@ -82,3 +83,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "icons/petCare-inicio.png"

@@ -6,14 +6,15 @@ class PedidosTile extends StatelessWidget {
 
   final Pedidos pedido;
   BuildContext context;
-  PedidosTile(this.context, this.pedido);
+  String uid;
+  PedidosTile(this.context, this.pedido, this.uid);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context)=>AngelScreen(pedido))
+          MaterialPageRoute(builder: (context)=>AngelScreen(pedido, uid))
         );
       },
       child: Card(

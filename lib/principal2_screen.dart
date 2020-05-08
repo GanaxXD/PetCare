@@ -117,7 +117,34 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                             physics: NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.all(12),
                             itemBuilder: (context, index) {
-                              return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]));
+                              if(snapshot.data.documents[index]["concluido"] == false){
+                                return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]), model.firebaseUser.uid);
+                              } else{
+                                return Container(
+                                  height: MediaQuery.of(context).size.height,
+                                  padding: const EdgeInsets.all(10),
+                                  margin: const EdgeInsets.all(20),
+                                  alignment: Alignment.center,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Image.asset('assets/dog.png', color: Colors.orangeAccent,
+                                        height: 25, width: 25,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 5),
+                                        child: Text("Sem pedidos disponíveis.",
+                                          style: TextStyle(
+                                              color: Colors.deepOrange,
+                                              fontSize: 14
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
                             },
                           );
                         }

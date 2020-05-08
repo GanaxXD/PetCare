@@ -4,18 +4,17 @@ import 'package:petcare_app/logged_pages/angel_screen.dart';
 
 class CardAngel extends StatelessWidget {
 
- /* String angel, objective, place, medicine;
-  CardAngel({this.angel, this.objective, this.place, this.medicine});
-*/
-
  Pedidos pedido;
+ String uid;
+
+ CardAngel(this.pedido, this.uid);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context)=>AngelScreen(pedido))
+          MaterialPageRoute(builder: (context)=>AngelScreen(pedido, uid))
         );
       },
       child: Container(
