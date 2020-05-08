@@ -397,7 +397,7 @@ class _CadastrarState extends State<Cadastrar> {
                                 pedido.chave = inicio.toString();
                                 pedido.anjo = !model.isLoggedIn() ? "Usuário desconhecido" : model.userData["usuario"].toString();
                                 pedido.id = pedidoData["usuario"]+pedidoData["chave"];
-                                pedido.idMeuChamado = null; //pegará na função addPedido, logo abaixo.
+
 
                                 await PedidosModel.of(context).addPedido(pedidosData: pedidoData);
                                 print(pedido.id);

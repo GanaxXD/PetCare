@@ -23,12 +23,20 @@ class MeusPedidosTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage('assets/pegada.png'),
+                color: pedido.concluido=="S"? Colors.green : Colors.redAccent,
+                height: 50,
+                padding: const EdgeInsets.only(right: 5),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage('assets/pegada.png'),
+                    ),
                   ),
                 ),
               ),

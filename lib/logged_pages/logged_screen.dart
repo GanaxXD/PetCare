@@ -5,6 +5,7 @@ import 'package:petcare_app/logged_pages/cadastrar_screen.dart';
 import 'package:petcare_app/models/user_model.dart';
 import 'package:petcare_app/my_calls%20_screen.dart';
 import 'package:petcare_app/principal2_screen.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:scoped_model/scoped_model.dart';
 
 class LoggedScreen extends StatefulWidget {
@@ -49,7 +50,22 @@ class _LoggedScreenState extends State<LoggedScreen> {
         ];
 
         return WillPopScope(
-          onWillPop: (){},
+          onWillPop: (){
+            return Alert(
+              context: context,
+              title: "Atenção!",
+              type: AlertType.warning,
+              desc: "Para navegar entre as telas, utilize o menu"
+                  " inferior da tela.",
+              buttons: [
+                DialogButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text("Ok", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),),
+                  color: Colors.orange,
+                ),
+              ]
+            ).show();
+          },
           child: Scaffold(
             appBar: AppBar(
               title: Text("PET CARE"),

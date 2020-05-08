@@ -23,6 +23,7 @@ class PedidosModel extends Model{
     Firestore.instance.collection("usuarios").document(userId)
       .collection("pedidosFeitos").add(pedido.toMap()).then((doc){
        pedido.idMeuChamado = doc.documentID;
+       pedido.usuario_do_chamado = userId;
     });
     notifyListeners();
 

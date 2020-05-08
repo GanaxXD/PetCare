@@ -38,9 +38,9 @@ class CardPesquisa extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    pedido.anjo.length > 30 ?
-                    Text("Anjo: "+pedido.anjo.substring(0,30)+"...", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),) :
-                    Text("Anjo: "+pedido.anjo, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                    pedido.pet.length > 30 ?
+                    Text("Pet: "+pedido.pet.substring(0,30)+"...", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),) :
+                    Text("Pet: "+pedido.pet, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
 
                     pedido.objetivo.length > 30 ?
                     Text("Objetivo: "+ pedido.objetivo.substring(0,30)+"...", style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),):

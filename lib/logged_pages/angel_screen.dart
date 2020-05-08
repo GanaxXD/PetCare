@@ -204,15 +204,14 @@ class AngelScreen extends StatelessWidget {
                           title: "Finalizar Pedido?",
                           desc: "Deseja Finalizar o pedido criado? Ao finalizá-lo,"
                               " o sistema entenderá que você já entrou em contato com a dono "
-                              "deste chamado e já entrou em um acordo com o mesmo. Finalizar não é"
-                              " o mesmo que excluir. Você só poderá excluir os seus pedidos.",
+                              "deste chamado e já entrou em um acordo com o mesmo. ",
                           buttons: [
                             DialogButton(
                                 color: Colors.orange,
                                 child: Text("Finalizar", style:
                                 TextStyle(color: Colors.white, fontSize: 20,)),
                                 onPressed: () async {
-                                  await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).setData({
+                                  await Firestore.instance.collection("usuarios").document(uid).collection("pedidosFeitos").document(pedido.idMeuChamado).setData({
                                     "concluido": "S",
                                     "instagram":  pedido.contato.toString(),
                                     "facebook": pedido.facebook,
@@ -226,7 +225,10 @@ class AngelScreen extends StatelessWidget {
                                     "usuario_do_chamado": uid,
                                     "chave" : pedido.chave,
                                     "data_do_pedido": pedido.dataDoPedido,
-                                  }).then((_){
+                                    "id":pedido.anjo+pedido.chave,
+                                    "id_do_chamado": pedido.idMeuChamado,
+                                  });
+                                  await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).delete().then((_){
                                     Navigator.of(context).push(MaterialPageRoute(
                                         builder: (context) => LoggedScreen()
                                     ));

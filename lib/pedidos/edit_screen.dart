@@ -258,9 +258,9 @@ class _EditScreenState extends State<EditScreen> {
                                               color: Colors.orange,
                                               child: Text("Fechar", style:
                                               TextStyle(color: Colors.white, fontSize: 20,)),
-                                              onPressed: () => Navigator.of(context).pop() /*Navigator.of(context).push(MaterialPageRoute(
+                                              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                                                            builder: (context) => LoggedScreen()
-                                                         )),*/
+                                                         )),
                                           )
                                         ]
                                     ).show();

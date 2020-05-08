@@ -94,13 +94,15 @@ class _FilterScreenState extends State<FilterScreen> {
                         return ListView.builder(
                             itemCount: snapshot.data.documents.length,
                             shrinkWrap: true,
+                            reverse: false,
                             padding: const EdgeInsets.all(12),
                             physics: NeverScrollableScrollPhysics(),
                             itemBuilder: (context, index){
                               print(pedidos[index].medicamento);
-                              return filter == null || filter == "" || filter == " "?
+                              return filter == null || filter == ""?
                                 CardPesquisa(context, Pedidos.fromDocuments(snapshot.data.documents[index])) :
-                                  pedidos[index].medicamento.toLowerCase().contains(filter.toLowerCase()) 
+                                  pedidos[index].objetivo.toLowerCase().contains(filter.toLowerCase())
+                                      || pedidos[index].medicamento.toLowerCase().contains(filter.toLowerCase())
                                       || pedidos[index].pet.toLowerCase().contains(filter.toLowerCase()) 
                                       || pedidos[index].endereco.toLowerCase().contains(filter.toLowerCase())
                                       || pedidos[index].anjo.toLowerCase().contains(filter.toLowerCase())
@@ -116,8 +118,7 @@ class _FilterScreenState extends State<FilterScreen> {
                                         fontSize: 12
                                       ), textAlign: TextAlign.center,),
                                     );
-                              //return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]));
-                            }
+                              }
                         );
                       }
                     }

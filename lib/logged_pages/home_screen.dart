@@ -25,35 +25,37 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.orange,
         centerTitle: true,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.1,
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(top: 16, bottom: 0),
-            child: Image.asset('assets/petCare-inicio.png',
-              height: MediaQuery.of(context).size.height *0.5,
-              width: MediaQuery.of(context).size.width *0.5,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
             ),
-          ),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: CircularButton(
-              title: "Entrar",
-              backgroundColor: Colors.orange,
-              colorText: Colors.white,
-              onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => LoginScreen()
-                ));
-              },
+            Padding(
+              padding: const EdgeInsets.only(top: 16, bottom: 0),
+              child: Image.asset('assets/petCare-inicio.png',
+                height: MediaQuery.of(context).size.height *0.5,
+                width: MediaQuery.of(context).size.width *0.5,
+              ),
             ),
-          ),
-        ],
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircularButton(
+                title: "Entrar",
+                backgroundColor: Colors.orange,
+                colorText: Colors.white,
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => LoginScreen()
+                  ));
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:petcare_app/logged_pages/logged_screen.dart';
+import 'package:petcare_app/my_calls%20_screen.dart';
 import 'package:petcare_app/pedidos/edit_screen.dart';
 import 'package:petcare_app/pedidos/pedidos.dart';
 import 'package:petcare_app/widgets/circular_button.dart';
@@ -233,21 +234,7 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
                                   "usuario_do_chamado": uid,
                                   "chave":pedido.chave,
                                 });
-                                await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).setData({
-                                  "concluido": "S",
-                                  "instagram": pedido.contato,
-                                  "facebook": pedido.facebook,
-                                  "data_do_pedido": pedido.dataDoPedido,
-                                  "endereco":pedido.endereco,
-                                  "medicamento" : pedido.medicamento,
-                                  "nomepet": pedido.pet,
-                                  "numero" :pedido.numero,
-                                  "objetivo" : pedido.objetivo,
-                                  "sexopet": pedido.sexoPet,
-                                  "usuario" : pedido.anjo,
-                                  "usuario_do_chamado": uid,
-                                  "chave":pedido.chave,
-                                }).then((_){
+                                await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).delete().then((_){
                                   Navigator.of(context).push(MaterialPageRoute(
                                       builder: (context) => LoggedScreen()
                                   ));
@@ -295,51 +282,6 @@ class _MeusPedidosScreenState extends State<MeusPedidosScreen> {
                                         builder: (context) => EditScreen(this.pedido, this.uid)
                                     )
                                 );
-                              }
-                          ),
-                          DialogButton(
-                            color: Colors.orange,
-                            child: Text("Cancelar", style:
-                            TextStyle(color: Colors.white, fontSize: 20,)),
-                            onPressed: () => Navigator.pop(context),
-                          )
-                        ]
-                    ).show();
-                  },
-                ),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Expanded(
-                child: CircularButton(
-                  colorText: Colors.white,
-                  backgroundColor: Colors.redAccent,
-                  title: "Excluir Pedido",
-                  onPressed: (){
-                    return Alert(
-                        context: context,
-                        type: AlertType.warning,
-                        title: "Excluir Pedido?",
-                        desc: "Deseja excluir o seu pedido.",
-                        buttons: [
-                          DialogButton(
-                              color: Colors.orange,
-                              child: Text("Excluir", style:
-                              TextStyle(color: Colors.white, fontSize: 20,)),
-                              onPressed: () async {
-                                print(pedido.id);
-                                await Firestore.instance.collection("usuarios").document(uid).collection("pedidosFeitos").document(pedido.idMeuChamado).delete();
-                                await Firestore.instance.collection("pedidos").document(pedido.anjo+pedido.chave).delete().then((_){
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => LoggedScreen()
-                                  ));
-                                }).catchError((e){
-                                  print(e.toString());
-                                });
-
                               }
                           ),
                           DialogButton(

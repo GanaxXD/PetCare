@@ -23,12 +23,20 @@ class PedidosTile extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: AssetImage('assets/pegada.png'),
+                height: 50,
+                width: 5,
+                color: pedido.concluido=="S"? Colors.green:Colors.redAccent,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage('assets/pegada.png'),
+                    ),
                   ),
                 ),
               ),
@@ -39,8 +47,8 @@ class PedidosTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     pedido.anjo.length > 30 ?
-                        Text("Anjo: "+pedido.anjo.substring(0,30)+"...", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),) :
-                        Text("Anjo: "+pedido.anjo, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text("Pet: "+pedido.pet.substring(0,30)+"...", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),) :
+                        Text("Pet: "+pedido.pet, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
 
                     pedido.objetivo.length > 30 ?
                         Text("Objetivo: "+ pedido.objetivo.substring(0,30)+"...", style: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),):

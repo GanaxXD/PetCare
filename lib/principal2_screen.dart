@@ -96,10 +96,7 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                       stream: Firestore.instance.collection("pedidos").snapshots(),
                       // ignore: missing_return
                       builder: (context, snapshot){
-                        print("INDEX: "+snapshot.data.documents.length.toString());
-                        print("TEM DATA? "+snapshot.hasData.toString());
-                        print("É NULO? "+snapshot.data.toString());
-                        if(!snapshot.hasData || snapshot.data == null || snapshot.data.documents.length < 0){
+                        if(!snapshot.hasData || snapshot.data == null || snapshot.data.documents.length <= 0){
                           return Container(
                             padding: const EdgeInsets.all(10),
                             margin: const EdgeInsets.all(20),
@@ -126,49 +123,16 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                           return ListView.builder(
                             itemCount: snapshot.data.documents.length,
                             shrinkWrap: true,
+                            reverse: false,
                             physics: NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.all(12),
                             //ignore: missing_return
                             itemBuilder: (context, index) {
-                              print("TAMANHO DA LISTA: "+pedidos.length.toString());
-                              print("PEDIDOS: "+pedidos[index].concluido.toString());
-                              print("DOCUMENT[INDEX]"+snapshot.data.documents[index]["concluido"]);
-                              if(snapshot.data.documents[index]["concluido"].toString().contains("N")){
-                                print("INDEX: "+index.toString());
-                                print("DOCUMENT[INDEX][CONCLUIDO]: "+snapshot.data.documents[index]["concluido"]); //Pedidos.fromDocuments(snapshot.data.documents[index])
-                                return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]), model.firebaseUser.uid);
-                              } else{
-                                return Container(
-                                  height: MediaQuery.of(context).size.height,
-                                  padding: const EdgeInsets.all(10),
-                                  margin: const EdgeInsets.all(20),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: <Widget>[
-                                      Image.asset('assets/dog.png', color: Colors.orangeAccent,
-                                        height: 25, width: 25,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: Text("Sem pedidos disponíveis.",
-                                          style: TextStyle(
-                                              color: Colors.deepOrange,
-                                              fontSize: 14
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              }
+                              return PedidosTile(context, Pedidos.fromDocuments(snapshot.data.documents[index]), model.firebaseUser.uid);//Pedidos.fromDocuments(snapshot.data.documents[index])
                             },
                           );
                         }
                       },
-
                     ),
                   ],
                 ),
