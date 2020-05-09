@@ -123,7 +123,7 @@ class _PrincipalScreen2State extends State<PrincipalScreen2> {
                           return ListView.builder(
                             itemCount: snapshot.data.documents.length,
                             shrinkWrap: true,
-                            reverse: false,
+                            reverse: true,
                             physics: NeverScrollableScrollPhysics(),
                             padding: const EdgeInsets.all(12),
                             //ignore: missing_return
