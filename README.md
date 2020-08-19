@@ -21,14 +21,14 @@ Abaixo, é possivel ter a visão do protótipo criado:
 
 ###### Pedidos
 <p align="left">
-  <img src="readme/2.gif" title="Tela Principal">
-  <img src="readme/3.gif" title="Criação de Pedidos">
-  <img src="readme/5.gif" title="Visão de Pedidos Criados">
+    <img src="readme/2.gif" title="Tela Principal">
+    <img src="readme/3.gif" title="Criação de Pedidos">
+    <img src="readme/5.gif" title="Visão de Pedidos Criados">
 </p>
 
 
 ###### Navegador de Páginas (Bottom Navigator Bar)
 <p align= "left">
-  <img src="readme/4.gif" title="Navegador de páginas">
+    <img src="readme/4.gif" title="Navegador de páginas">
 </p>
 
