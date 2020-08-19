@@ -1,16 +1,34 @@
-# petcare_app
+# PetCare
 
-Uma aplicação voltada para ajudar donos de pets a conseguir medicamentos que estão sobrando.
+Uma aplicação voltada para ajudar donos de pets a conseguir medicamentos com outros donos, ou doar medicamentos que estão sobrando. O objetivo da aplicação é manter o registro de diversos donos de pets que precisem doar ou pedir medicamentos para os tratamentos de seus pets.  
+  
+## Tecnologias Usadas
+Para a criação da aplicação, foram usadas as seguintes tecnologias:  
+  
+- Dart (Linguagem de Programação)
+- Flutter (*Framework*)
+- Android Studio (IDE)
+- *FireBase* (Banco de Dados)
+  
+  
+## Visão do Sistema
+Abaixo, é possivel ter a visão do protótipo criado:  
 
-## Getting Started
+###### Tela de Login
+<p align = "left">
+  <img src="readme/1.gif" title="Tela Inicial">
+</p>
 
-This project is a starting point for a Flutter application.
+###### Pedidos
+<p align="left">
+  <img src="readme/2.gif" title="Tela Principal">
+  <img src="readme/3.gif" title="Criação de Pedidos">
+  <img src="readme/5.gif" title="Visão de Pedidos Criados">
+</p>
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+###### Navegador de Páginas (Bottom Navigator Bar)
+<p align= "left">
+  <img src="readme/4.gif" title="Navegador de páginas">
+</p>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
