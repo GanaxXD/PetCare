@@ -1,6 +1,11 @@
 # PetCare
 
-Uma aplicação voltada para ajudar donos de pets a conseguir medicamentos com outros donos, ou doar medicamentos que estão sobrando. O objetivo da aplicação é manter o registro de diversos donos de pets que precisem doar ou pedir medicamentos para os tratamentos de seus pets.  
+Uma aplicação voltada para ajudar donos de pets a conseguir medicamentos com outros donos, 
+ou doar medicamentos que estão sobrando. O objetivo da aplicação é manter o registro de 
+diversos donos de pets que precisem doar ou pedir medicamentos para os tratamentos de seus 
+pets. A aplicação encontra-se na versão 1.0, e vida, posteriormente, utilizar
+  a API de geolocalização para mostrar em tempo real, o local de encontro
+  Combinado entre os envolvidos.
   
 ## Tecnologias Usadas
 Para a criação da aplicação, foram usadas as seguintes tecnologias:  
